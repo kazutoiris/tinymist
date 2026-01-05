@@ -407,6 +407,11 @@ export class TypstDocumentContext<O = any> {
 
     this.isRendering = true;
     const doUpdate = async () => {
+      const lastHeight = this.cachedDOMState.height;
+      const lastWidth = this.cachedDOMState.width;
+      const lastTop = this.cachedDOMState.boundingRect.top;
+      const lastLeft = this.cachedDOMState.boundingRect.left;
+
       this.cachedDOMState = this.retrieveDOMState();
 
       if (this.patchQueue.length === 0) {
@@ -431,6 +436,15 @@ export class TypstDocumentContext<O = any> {
           await this.r.rerender();
           this.r.rescale();
         }
+
+        if (lastHeight !== this.cachedDOMState.height) {
+          this.hookedElem.parentElement!.scrollBy(0, lastTop * (this.cachedDOMState.height / lastHeight - 1));
+        }
+
+        if (lastWidth !== this.cachedDOMState.width) {
+          this.hookedElem.parentElement!.scrollBy(lastLeft * (this.cachedDOMState.width / lastWidth - 1), 0);
+        }
+
         let t2 = performance.now();
 
         /// perf event
