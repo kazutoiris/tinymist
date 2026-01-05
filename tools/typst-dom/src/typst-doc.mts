@@ -407,13 +407,11 @@ export class TypstDocumentContext<O = any> {
 
     this.isRendering = true;
     const doUpdate = async () => {
-      const lastHeight = this.cachedDOMState.height;
       const lastWidth = this.cachedDOMState.width;
 
       this.cachedDOMState = this.retrieveDOMState();
 
-      const currentHeight = this.cachedDOMState.height;
-      const currentWidth = this.cachedDOMState.width;
+      const currentWidth = this.cachedDOMState.with;
 
       if (this.patchQueue.length === 0) {
         this.isRendering = false;
