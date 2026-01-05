@@ -149,9 +149,6 @@ jobs:
             curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
             echo "$HOME/.cargo/bin" >> $GITHUB_PATH
           fi
-          yarn install
-          yarn build:preview
-          yarn build:l10n
       - uses: swatinem/rust-cache@v2
         with:
           key: ${{ join(matrix.targets, '-') }}
@@ -168,6 +165,9 @@ jobs:
       - name: Install dependencies
         run: |
           ${{ matrix.packages_install }}
+          yarn install
+          yarn build:preview
+          yarn build:l10n
       - name: Build artifacts
         run: |
           # Actually do builds and make zips and whatnot
