@@ -438,8 +438,8 @@ export class TypstDocumentContext<O = any> {
           this.r.rescale();
         }
 
-        const svg = this.hookedElem.firstElementChild as SVGElement;
         if (lastWidth !== currentWidth) {
+          const svg = this.hookedElem.firstElementChild as SVGElement;
           const scale = currentWidth / lastWidth;
           this.hookedElem.parentElement!.scrollBy(-svg.getBoundingClientRect().left * (scale - 1), -svg.getBoundingClientRect().top * (scale - 1));
         }
