@@ -438,15 +438,13 @@ export class TypstDocumentContext<O = any> {
           this.r.rescale();
         }
 
-        setTimeout(()=>{
-          const svg = this.hookedElem.firstElementChild as SVGElement;
-          if (lastHeight !== currentHeight) {
-            this.hookedElem.parentElement!.scrollBy(0, svg.getBoundingClientRect().top * (currentHeight/ lastHeight - 1));
-          }
-          if (lastWidth !== currentWidth) {
-            this.hookedElem.parentElement!.scrollBy(svg.getBoundingClientRect().left * (currentWidth / lastWidth - 1), 0);
-          }
-        },1000);
+        const svg = this.hookedElem.firstElementChild as SVGElement;
+        if (lastHeight !== currentHeight) {
+          this.hookedElem.parentElement!.scrollBy(0, svg.getBoundingClientRect().top * (currentHeight/ lastHeight - 1));
+        }
+        if (lastWidth !== currentWidth) {
+          this.hookedElem.parentElement!.scrollBy(svg.getBoundingClientRect().left * (currentWidth / lastWidth - 1), 0);
+        }
 
         let t2 = performance.now();
 
