@@ -87,9 +87,6 @@ jobs:
         shell: bash
         run: |
           curl --proto '=https' --tlsv1.2 -LsSf https://github.com/Myriad-Dreamin/cargo-dist/releases/download/v0.28.6-tinymist.3/cargo-dist-installer.sh | sh
-          yarn install
-          yarn build:preview
-          yarn build:l10n
       - name: Cache dist
         uses: actions/upload-artifact@v4
         with:
