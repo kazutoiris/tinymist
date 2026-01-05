@@ -169,9 +169,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 24
-          cache: 'yarn'
       - name: Install deps
-        run: yarn install
+        run: |
+          npm i yarn -g
+          yarn install
       - name: Check and build assets
         run: |
           yarn build:preview
