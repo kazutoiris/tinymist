@@ -439,9 +439,9 @@ export class TypstDocumentContext<O = any> {
         }
 
         const svg = this.hookedElem.firstElementChild as SVGElement;
-        if (lastHeight !== currentHeight || lastWidth !== currentWidth) {
-          const scale = Math.min(currentHeight / lastHeight, currentWidth / lastWidth);
-          this.hookedElem.parentElement!.scrollBy(svg.getBoundingClientRect().left * (scale - 1), svg.getBoundingClientRect().top * (scale - 1));
+        if (lastWidth !== currentWidth) {
+          const scale = currentWidth / lastWidth;
+          this.hookedElem.parentElement!.scrollBy(-svg.getBoundingClientRect().left * (scale - 1), -svg.getBoundingClientRect().top * (scale - 1));
         }
 
         let t2 = performance.now();
