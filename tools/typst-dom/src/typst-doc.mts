@@ -412,6 +412,9 @@ export class TypstDocumentContext<O = any> {
 
       this.cachedDOMState = this.retrieveDOMState();
 
+      const currentHeight = this.cachedDOMState.height;
+      const currentWidth = this.cachedDOMState.width;
+
       if (this.patchQueue.length === 0) {
         this.isRendering = false;
         this.postprocessChanges();
@@ -434,15 +437,16 @@ export class TypstDocumentContext<O = any> {
           await this.r.rerender();
           this.r.rescale();
         }
-        
-        const svg = this.hookedElem.firstElementChild as SVGElement;
-        if (lastHeight !== this.cachedDOMState.height) {
-          this.hookedElem.parentElement!.scrollBy(0, svg.getBoundingClientRect().top * (this.cachedDOMState.height / lastHeight - 1));
-        }
-        if (lastWidth !== this.cachedDOMState.width) {
-          this.hookedElem.parentElement!.scrollBy(svg.getBoundingClientRect().left * (this.cachedDOMState.width / lastWidth - 1), 0);
-        }
-        
+
+        setTimeout(()=>{
+          const svg = this.hookedElem.firstElementChild as SVGElement;
+          if (lastHeight !== currentHeight) {
+            this.hookedElem.parentElement!.scrollBy(0, svg.getBoundingClientRect().top * (currentHeight/ lastHeight - 1));
+          }
+          if (lastWidth !== currentWidth) {
+            this.hookedElem.parentElement!.scrollBy(svg.getBoundingClientRect().left * (currentWidth / lastWidth - 1), 0);
+          }
+        },1000);
 
         let t2 = performance.now();
 
