@@ -9,6 +9,7 @@ homepage = "https://github.com/Myriad-Dreamin/tinymist"
 repository = "https://github.com/Myriad-Dreamin/tinymist"
 # also change in ci.yml
 rust-version = "1.89"
+allow-dirty = true
 
 [workspace]
 resolver = "2"
