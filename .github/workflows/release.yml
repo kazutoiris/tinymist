@@ -165,7 +165,15 @@ jobs:
       - name: Install dependencies
         run: |
           ${{ matrix.packages_install }}
-          yarn install
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: 'yarn'
+      - name: Install deps
+        run: yarn install
+      - name: Check and build assets
+        run: |
           yarn build:preview
           yarn build:l10n
       - name: Build artifacts
