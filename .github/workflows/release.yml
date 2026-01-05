@@ -86,7 +86,7 @@ jobs:
         # failing. otherwise `sh` won't catch that `curl` returned non-0
         shell: bash
         run: |
-          "curl --proto '=https' --tlsv1.2 -LsSf https://github.com/Myriad-Dreamin/cargo-dist/releases/download/v0.28.6-tinymist.3/cargo-dist-installer.sh | sh"
+          curl --proto '=https' --tlsv1.2 -LsSf https://github.com/Myriad-Dreamin/cargo-dist/releases/download/v0.28.6-tinymist.3/cargo-dist-installer.sh | sh
           yarn install
           yarn build:preview
           yarn build:l10n
