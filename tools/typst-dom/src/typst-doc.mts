@@ -409,8 +409,6 @@ export class TypstDocumentContext<O = any> {
     const doUpdate = async () => {
       const lastHeight = this.cachedDOMState.height;
       const lastWidth = this.cachedDOMState.width;
-      const lastTop = this.cachedDOMState.boundingRect.top;
-      const lastLeft = this.cachedDOMState.boundingRect.left;
 
       this.cachedDOMState = this.retrieveDOMState();
 
@@ -436,13 +434,13 @@ export class TypstDocumentContext<O = any> {
           await this.r.rerender();
           this.r.rescale();
         }
-
+        
+        const svg = this.hookedElem.firstElementChild as SVGElement;
         if (lastHeight !== this.cachedDOMState.height) {
-          this.hookedElem.parentElement!.scrollBy(0, lastTop * (this.cachedDOMState.height / lastHeight - 1));
+          this.hookedElem.parentElement!.scrollBy(0, svg.getBoundingClientRect().top * (this.cachedDOMState.height / lastHeight - 1));
         }
-
         if (lastWidth !== this.cachedDOMState.width) {
-          this.hookedElem.parentElement!.scrollBy(lastLeft * (this.cachedDOMState.width / lastWidth - 1), 0);
+          this.hookedElem.parentElement!.scrollBy(svg.getBoundingClientRect().left * (this.cachedDOMState.width / lastWidth - 1), 0);
         }
         
 
