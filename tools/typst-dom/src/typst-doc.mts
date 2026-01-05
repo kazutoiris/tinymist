@@ -444,6 +444,7 @@ export class TypstDocumentContext<O = any> {
         if (lastWidth !== this.cachedDOMState.width) {
           this.hookedElem.parentElement!.scrollBy(lastLeft * (this.cachedDOMState.width / lastWidth - 1), 0);
         }
+        
 
         let t2 = performance.now();
 
