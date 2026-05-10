@@ -1,11 +1,6 @@
 name: tinymist::ci
 on:
   push:
-    branches:
-      - main
-      - nightly
-    tags:
-      - "*"
   pull_request:
     types: [opened, synchronize]
     branches:
