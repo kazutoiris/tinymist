@@ -1,3 +1,6 @@
+[dist]
+allow-dirty = ["ci", "msi"]
+
 [workspace.package]
 description = "An integrated language service for Typst."
 authors = ["Myriad-Dreamin <camiyoru@gmail.com>", "Nathan Varner"]
