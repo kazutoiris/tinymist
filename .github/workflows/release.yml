@@ -146,7 +146,7 @@ jobs:
         with:
           node-version: 24
       - name: Install deps
-        run: yarn install
+        run: npm i yarn -g && yarn install
       - name: Install Rust non-interactively if not already installed
         if: ${{ matrix.container }}
         run: |
