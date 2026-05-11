@@ -141,6 +141,12 @@ jobs:
         with:
           persist-credentials: false
           submodules: recursive
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Install deps
+        run: npm i yarn -g && yarn install
       - name: Install Rust non-interactively if not already installed
         if: ${{ matrix.container }}
         run: |
@@ -164,6 +170,10 @@ jobs:
       - name: Install dependencies
         run: |
           ${{ matrix.packages_install }}
+      - name: Check and build assets
+        run: |
+          yarn build:preview
+          yarn build:l10n
       - name: Build artifacts
         run: |
           # Actually do builds and make zips and whatnot
