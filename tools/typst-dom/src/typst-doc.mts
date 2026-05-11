@@ -534,8 +534,8 @@ export class TypstDocumentContext<O = any> {
     if (!(newBBox && scrollPosition && newBBox.width !== scrollPosition.width)) {
       return;
     }
-    this.hookedElem.parentElement!.scrollTop = -newBBox.height * scrollPosition.top / scrollPosition.height;
-    this.hookedElem.parentElement!.scrollLeft = -newBBox.width * scrollPosition.left / scrollPosition.width;
+    this.hookedElem.parentElement!.scrollTop = Math.cell(-newBBox.height * scrollPosition.top / scrollPosition.height);
+    this.hookedElem.parentElement!.scrollLeft = Math.cell(-newBBox.width * scrollPosition.left / scrollPosition.width);
   }
 }
 
