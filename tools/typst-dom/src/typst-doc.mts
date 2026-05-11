@@ -534,13 +534,8 @@ export class TypstDocumentContext<O = any> {
     if (!(newBBox && scrollPosition && newBBox.width !== scrollPosition.width)) {
       return;
     }
-    const scrollAdjustLeftRatio = scrollPosition.left / scrollPosition.width;
-    const scrollAdjustTopRatio = scrollPosition.top / scrollPosition.height;
-    const expectedLeft = newBBox.width * scrollAdjustLeftRatio;
-    const expectedTop = newBBox.height * scrollAdjustTopRatio;
-
-    this.hookedElem.parentElement!.scrollTop = Math.round(-expectedTop);
-    this.hookedElem.parentElement!.scrollLeft = Math.round(-expectedLeft);
+    this.hookedElem.parentElement!.scrollTop = newBBox.height * scrollPosition.top / scrollPosition.height;
+    this.hookedElem.parentElement!.scrollLeft = newBBox.width * scrollPosition.left / scrollPosition.width;
   }
 }
 
