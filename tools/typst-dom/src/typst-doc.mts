@@ -539,9 +539,6 @@ export class TypstDocumentContext<O = any> {
     const expectedLeft = newBBox.width * scrollAdjustLeftRatio;
     const expectedTop = newBBox.height * scrollAdjustTopRatio;
 
-    const adjustedDiffLeft = newBBox.left - expectedLeft;
-    const adjustedDiffTop = newBBox.top - expectedTop;
-
     this.hookedElem.parentElement.scrollTop = Math.round(-expectedTop * 10) / 10;
     this.hookedElem.parentElement.scrollLeft = Math.round(-expectedLeft * 10) / 10;
   }
