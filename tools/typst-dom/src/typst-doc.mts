@@ -545,8 +545,8 @@ export class TypstDocumentContext<O = any> {
       return;
     }
 
-    this.hookedElem.parentElement!.scrollTop = expectedTop;
-    this.hookedElem.parentElement!.scrollLeft = expectedLeft;
+    this.hookedElem.parentElement!.scrollTop = -expectedTop;
+    this.hookedElem.parentElement!.scrollLeft = -expectedLeft;
   }
 }
 
