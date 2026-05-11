@@ -541,12 +541,9 @@ export class TypstDocumentContext<O = any> {
 
     const adjustedDiffLeft = newBBox.left - expectedLeft;
     const adjustedDiffTop = newBBox.top - expectedTop;
-    if (Math.abs(adjustedDiffLeft) < 1e-1 && Math.abs(adjustedDiffTop) < 1e-1) {
-      return;
-    }
 
-    this.hookedElem.parentElement!.scrollTop = -expectedTop;
-    this.hookedElem.parentElement!.scrollLeft = -expectedLeft;
+    this.hookedElem.parentElement.scrollTop = Math.round(-expectedTop * 10) / 10;
+    this.hookedElem.parentElement.scrollLeft = Math.round(-expectedLeft * 10) / 10;
   }
 }
 
