@@ -14,19 +14,6 @@ env:
   CARGO_TARGET_ARM_UNKNOWN_LINUX_GNUEABIHF_LINKER: arm-linux-gnueabihf-gcc
 
 jobs:
-  pre_build:
-    permissions:
-      actions: write
-      contents: read
-    name: Duplicate Actions Detection
-    runs-on: ubuntu-latest
-    outputs:
-      should_skip: ${{ steps.skip_check.outputs.should_skip }}
-    steps:
-      - id: skip_check
-        uses: fkirc/skip-duplicate-actions@v5
-        with:
-          cancel_others: "true"
 
   checks-linux:
     name: Check Clippy, Formatting, Completion, Documentation, and Tests (Linux)
@@ -74,7 +61,7 @@ jobs:
       - name: Test Lockfile (Prepare)
         run: ./scripts/test-lock.sh
       - name: Test Lockfile (Check)
-        run: cargo test --package tinymist --lib -- route::tests --show-output --ignored 
+        run: cargo test --package tinymist --lib -- route::tests --show-output --ignored
 
   checks-windows:
     name: Check Minimum Rust version and Tests (Windows)
@@ -111,7 +98,7 @@ jobs:
           echo "tag=v$(jq -r '.version' editors/vscode/package.json)" >> $GITHUB_OUTPUT
       - name: Show tag
         run: echo "Tag is ${{ steps.tag.outputs.tag }}"
-  
+
   announce:
     needs: [prepare-build]
     permissions:
