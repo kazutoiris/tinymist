@@ -309,6 +309,9 @@ export function provideSvgDoc<
       if (this.hookedElem.style.height) {
         this.hookedElem.style.removeProperty("height");
       }
+
+      this.hookedElem.parentElement!.scrollTop = scaledHeight * container.boundingRect.top / container.height;
+      this.hookedElem.parentElement!.scrollLeft = scaledWidth * container.boundingRect.left / container.width;
     }
 
     private decorateSvgElement(svg: SVGElement, mode: PreviewMode) {
