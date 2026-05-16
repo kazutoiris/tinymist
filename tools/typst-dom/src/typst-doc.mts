@@ -445,11 +445,9 @@ export class TypstDocumentContext<O = any> {
           this.r.rescale();
           /// Adjusts scroll position to keep visual position in "doc" mode.
           /// Using `requestAnimationFrame` ensures the scroll adjustment happens after DOM updates.
-          requestAnimationFrame(() => {
-            if (lastScrollPosition && this.previewMode === PreviewMode.Doc) {
-              this.keepScrollPosition(lastScrollPosition);
-            }
-          });
+          if (lastScrollPosition && this.previewMode === PreviewMode.Doc) {
+            this.keepScrollPosition(lastScrollPosition);
+          }
         }
 
         let t2 = performance.now();
