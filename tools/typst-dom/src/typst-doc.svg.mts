@@ -294,8 +294,8 @@ export function provideSvgDoc<
 
       // set data applied width and height to memoize change
       if (svg.getAttribute("data-applied-width") !== appliedWidth && container.scrollPosition) {
-        this.hookedElem.parentElement!.scrollTop = -scaledHeight * container.scrollPosition.top / container.height;
-        this.hookedElem.parentElement!.scrollLeft = -scaledWidth * container.scrollPosition.left / container.width;
+        this.hookedElem.parentElement!.scrollTop = -scaledHeight * container.scrollPosition.top / container.scrollPosition.height;
+        this.hookedElem.parentElement!.scrollLeft = -scaledWidth * container.scrollPosition.left / container.scrollPosition.width;
       }
 
       this.rescaleSvgOn(svg);
