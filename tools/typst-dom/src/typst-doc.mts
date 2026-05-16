@@ -419,7 +419,7 @@ export class TypstDocumentContext<O = any> {
 
     this.isRendering = true;
     const doUpdate = async () => {
-      const lastScrollPosition = this.cachedDOMState.scrollPosition;
+      // const lastScrollPosition = this.cachedDOMState.scrollPosition;
       this.cachedDOMState = this.retrieveDOMState();
 
       if (this.patchQueue.length === 0) {
@@ -445,9 +445,9 @@ export class TypstDocumentContext<O = any> {
           this.r.rescale();
           /// Adjusts scroll position to keep visual position in "doc" mode.
           /// Using `requestAnimationFrame` ensures the scroll adjustment happens after DOM updates.
-          if (lastScrollPosition && this.previewMode === PreviewMode.Doc) {
-            this.keepScrollPosition(lastScrollPosition);
-          }
+          // if (lastScrollPosition && this.previewMode === PreviewMode.Doc) {
+          //   this.keepScrollPosition(lastScrollPosition);
+          // }
         }
 
         let t2 = performance.now();
@@ -526,15 +526,15 @@ export class TypstDocumentContext<O = any> {
   }
 
   /// Adjusts scroll position.
-  private keepScrollPosition(scrollPosition: DOMRect) {
-    const domState = this.retrieveDOMState();
-    const newBBox = domState.scrollPosition;
-    if (!(newBBox && scrollPosition && newBBox.width !== scrollPosition.width)) {
-      return;
-    }
-    this.hookedElem.parentElement!.scrollTop = Math.ceil(-newBBox.height * scrollPosition.top / scrollPosition.height);
-    this.hookedElem.parentElement!.scrollLeft = Math.ceil(-newBBox.width * scrollPosition.left / scrollPosition.width);
-  }
+  // private keepScrollPosition(scrollPosition: DOMRect) {
+  //   const domState = this.retrieveDOMState();
+  //   const newBBox = domState.scrollPosition;
+  //   if (!(newBBox && scrollPosition && newBBox.width !== scrollPosition.width)) {
+  //     return;
+  //   }
+  //   this.hookedElem.parentElement!.scrollTop = Math.ceil(-newBBox.height * scrollPosition.top / scrollPosition.height);
+  //   this.hookedElem.parentElement!.scrollLeft = Math.ceil(-newBBox.width * scrollPosition.left / scrollPosition.width);
+  // }
 }
 
 export interface TypstDocument<T> {
