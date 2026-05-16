@@ -288,8 +288,15 @@ export function provideSvgDoc<
       // apply scale
       const dataWidth = Number.parseFloat(svg.getAttribute("data-width")!);
       const dataHeight = Number.parseFloat(svg.getAttribute("data-height")!);
+      const appliedWidth = (dataWidth * scale).toString();
       const scaledWidth = Math.ceil(dataWidth * scale);
       const scaledHeight = Math.ceil(dataHeight * scale);
+
+      // set data applied width and height to memoize change
+      if (svg.getAttribute("data-applied-width") !== appliedWidth) {
+        this.hookedElem.parentElement!.scrollTop = scaledHeight * container.boundingRect.top / container.height;
+        this.hookedElem.parentElement!.scrollLeft = scaledWidth * container.boundingRect.left / container.width;
+      }
 
       this.rescaleSvgOn(svg);
 
@@ -309,9 +316,6 @@ export function provideSvgDoc<
       if (this.hookedElem.style.height) {
         this.hookedElem.style.removeProperty("height");
       }
-
-      this.hookedElem.parentElement!.scrollTop = scaledHeight * container.boundingRect.top / container.height;
-      this.hookedElem.parentElement!.scrollLeft = scaledWidth * container.boundingRect.left / container.width;
     }
 
     private decorateSvgElement(svg: SVGElement, mode: PreviewMode) {
