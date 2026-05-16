@@ -293,9 +293,9 @@ export function provideSvgDoc<
       const scaledHeight = Math.ceil(dataHeight * scale);
 
       // set data applied width and height to memoize change
-      if (svg.getAttribute("data-applied-width") !== appliedWidth) {
-        this.hookedElem.parentElement!.scrollTop = scaledHeight * container.boundingRect.top / container.height;
-        this.hookedElem.parentElement!.scrollLeft = scaledWidth * container.boundingRect.left / container.width;
+      if (svg.getAttribute("data-applied-width") !== appliedWidth && container.scrollPosition) {
+        this.hookedElem.parentElement!.scrollTop = -scaledHeight * container.scrollPosition.top / container.height;
+        this.hookedElem.parentElement!.scrollLeft = -scaledWidth * container.scrollPosition.left / container.width;
       }
 
       this.rescaleSvgOn(svg);
