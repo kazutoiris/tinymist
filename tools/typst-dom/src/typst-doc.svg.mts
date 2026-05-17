@@ -293,9 +293,16 @@ export function provideSvgDoc<
       const scaledHeight = Math.ceil(dataHeight * scale);
 
       // set data applied width and height to memoize change
-      if (svg.getAttribute("data-applied-width") !== appliedWidth && container.scrollPosition) {
-        this.hookedElem.parentElement!.scrollTop = -scaledHeight * container.scrollPosition.top / container.scrollPosition.height;
-        this.hookedElem.parentElement!.scrollLeft = -scaledWidth * container.scrollPosition.left / container.scrollPosition.width;
+      if (container.scrollPosition) {
+        if (svg.getAttribute("data-applied-width") !== appliedWidth) {
+          const heightRatio = Number.parseFloat(svg.getAttribute("data-height-ratio")!) || container.scrollPosition.top / container.scrollPosition.height;
+          const widthRatio = Number.parseFloat(svg.getAttribute("data-width-ratio")!) || container.scrollPosition.left / container.scrollPosition.width;
+          this.hookedElem.parentElement!.scrollTop = -scaledHeight * heightRatio;
+          this.hookedElem.parentElement!.scrollLeft = -scaledWidth * widthRatio;
+        } else {
+          svg.setAttribute("data-height-ratio", (container.scrollPosition.top / container.scrollPosition.height).toString());
+          svg.setAttribute("data-width-ratio", (container.scrollPosition.left / container.scrollPosition.width).toString());
+        }
       }
 
       this.rescaleSvgOn(svg);
