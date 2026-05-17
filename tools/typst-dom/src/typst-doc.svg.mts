@@ -299,8 +299,8 @@ export function provideSvgDoc<
         if (svg.getAttribute("data-applied-width") !== appliedWidth) {
           const heightRatio = Number.parseFloat(svg.getAttribute("data-height-ratio")!) || currentHeightRatio;
           const widthRatio = Number.parseFloat(svg.getAttribute("data-width-ratio")!) || currentWidthRatio;
-          this.hookedElem.parentElement!.scrollTop = -scaledHeight * heightRatio;
-          this.hookedElem.parentElement!.scrollLeft = -scaledWidth * widthRatio;
+          this.hookedElem.parentElement!.scrollTop = scaledHeight * heightRatio;
+          this.hookedElem.parentElement!.scrollLeft = scaledWidth * widthRatio;
         } else {
           svg.setAttribute("data-height-ratio", currentHeightRatio.toString());
           svg.setAttribute("data-width-ratio", currentWidthRatio.toString());
