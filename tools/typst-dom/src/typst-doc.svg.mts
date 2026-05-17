@@ -294,14 +294,16 @@ export function provideSvgDoc<
 
       // set data applied width and height to memoize change
       if (container.scrollPosition) {
+        const currentHeightRatio = -container.scrollPosition.top / container.scrollPosition.height;
+        const currentWidthRatio = -container.scrollPosition.left / container.scrollPosition.width;
         if (svg.getAttribute("data-applied-width") !== appliedWidth) {
-          const heightRatio = Number.parseFloat(svg.getAttribute("data-height-ratio")!) || container.scrollPosition.top / container.scrollPosition.height;
-          const widthRatio = Number.parseFloat(svg.getAttribute("data-width-ratio")!) || container.scrollPosition.left / container.scrollPosition.width;
+          const heightRatio = Number.parseFloat(svg.getAttribute("data-height-ratio")!) || currentHeightRatio;
+          const widthRatio = Number.parseFloat(svg.getAttribute("data-width-ratio")!) || currentWidthRatio;
           this.hookedElem.parentElement!.scrollTop = -scaledHeight * heightRatio;
           this.hookedElem.parentElement!.scrollLeft = -scaledWidth * widthRatio;
         } else {
-          svg.setAttribute("data-height-ratio", (container.scrollPosition.top / container.scrollPosition.height).toString());
-          svg.setAttribute("data-width-ratio", (container.scrollPosition.left / container.scrollPosition.width).toString());
+          svg.setAttribute("data-height-ratio", currentHeightRatio.toString());
+          svg.setAttribute("data-width-ratio", currentWidthRatio.toString());
         }
       }
 
